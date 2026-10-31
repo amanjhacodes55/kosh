@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Two palettes: dark (the default, as in a dealing room) and light. src/client/theme.ts sets
+   data-theme on <html>. Emerald is the action colour; gold marks money and highlights. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a0f14;
+  --panel: #10171f;
+  --raise: #17202b;
+  --hover: #1e2935;
+  --line: #22303e;
+  --ink: #e8eef5;
+  --ink-2: #aab6c4;
+  --muted: #6f7d8e;
+  --accent: #19c39a;
+  --accent-2: #0ea5b7;
+  --accent-ink: #5fe0bf;
+  --gold: #e5b454;
+  --good: #34d399;
+  --warn: #f5b84a;
+  --danger: #f0566a;
+  --info: #60a5fa;
+  --glass: rgba(16, 23, 31, 0.78);
+  --scrim: rgba(2, 6, 10, 0.62);
+  --shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --glow: rgba(25, 195, 154, 0.25);
+  --grid: rgba(255, 255, 255, 0.035);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --raise: #eef2f5;
+  --hover: #e6ebf0;
+  --line: #dde3ea;
+  --ink: #0d1720;
+  --ink-2: #3d4b5a;
+  --muted: #6c7a89;
+  --accent: #0e9f7e;
+  --accent-2: #0b8ea0;
+  --accent-ink: #0a7f65;
+  --gold: #b07a1f;
+  --good: #0f9f6e;
+  --warn: #b97c09;
+  --danger: #d6334a;
+  --info: #2563eb;
+  --glass: rgba(255, 255, 255, 0.82);
+  --scrim: rgba(13, 23, 32, 0.4);
+  --shadow: 0 24px 60px -24px rgba(16, 40, 60, 0.28), 0 2px 8px rgba(16, 40, 60, 0.08);
+  --glow: rgba(14, 159, 126, 0.2);
+  --grid: rgba(13, 23, 32, 0.04);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-raise: var(--raise);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-gold: var(--gold);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+.theme-shift,
+.theme-shift *,
+.theme-shift *::before,
+.theme-shift *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, fill 0.3s ease !important;
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+    height: 2.35rem; padding: 0 0.95rem; border-radius: 0.65rem;
+    font-weight: 500; font-size: 0.875rem; white-space: nowrap;
+    background: var(--raise); color: var(--ink); border: 1px solid var(--line);
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.2s, transform 0.15s, filter 0.15s;
+  }
+  .btn:hover { background: var(--hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--glow); }
+  .btn:disabled { opacity: 0.5; pointer-events: none; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff;
+    box-shadow: 0 6px 18px -8px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  .btn-primary:hover { background: linear-gradient(135deg, var(--accent), var(--accent-2)); filter: brightness(1.08); }
+  .btn-danger { background: var(--danger); border-color: transparent; color: #fff; }
+  .btn-danger:hover { background: var(--danger); filter: brightness(1.1); }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
+  .btn-ghost:hover { background: var(--raise); color: var(--ink); }
+  .btn-sm { height: 2rem; padding: 0 0.7rem; font-size: 0.8rem; border-radius: 0.55rem; }
+
+  .input {
+    height: 2.45rem; width: 100%; border-radius: 0.65rem; padding: 0 0.8rem;
+    background: var(--bg); border: 1px solid var(--line); color: var(--ink); outline: none; font-size: 0.9rem;
+    transition: border-color 0.15s, box-shadow 0.2s;
+  }
+  textarea.input { height: auto; padding: 0.6rem 0.8rem; }
+  .input:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  .input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+  .input::placeholder { color: var(--muted); }
+  select.input {
+    appearance: none; padding-right: 2rem;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 17px) 50%, calc(100% - 12px) 50%; background-size: 5px 5px; background-repeat: no-repeat;
+  }
+  .label { display: block; font-size: 0.75rem; font-weight: 500; color: var(--ink-2); margin-bottom: 0.35rem; }
+
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 1rem; }
+  .glass { background: var(--glass); -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px); }
+  .num { font-variant-numeric: tabular-nums; }
+  .chip { display: inline-flex; align-items: center; gap: 0.3rem; height: 1.4rem; padding: 0 0.5rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap; }
+
+  .tbl { width: 100%; font-size: 0.85rem; border-collapse: separate; border-spacing: 0; }
+  .tbl th { text-align: left; font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); z-index: 1; }
+  .tbl td { padding: 0.62rem 0.85rem; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tbody tr { transition: background 0.12s; }
+  .tbl tbody tr.link { cursor: pointer; }
+  .tbl tbody tr.link:hover { background: var(--raise); }
+  .tbl .r { text-align: right; }
+
+  .text-gradient { background: linear-gradient(100deg, var(--accent-ink), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .scroll-thin { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes pop { from { opacity: 0; transform: scale(0.97) translateY(6px); } to { opacity: 1; transform: none; } }
+.pop { animation: pop 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes flash { 0% { background: color-mix(in srgb, var(--accent) 22%, transparent); } 100% { background: transparent; } }
+.flash { animation: flash 1.6s ease-out; }
+.bg-grid { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 44px 44px; }

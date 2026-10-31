@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono&display=block" />
+<style>
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: grid; place-items: center; overflow: hidden;
+    background: radial-gradient(ellipse at 30% 30%, #0f3b33 0%, #0b1a1f 50%, #070b0f 100%);
+    color: #e8eef5; font-family: "Geist", sans-serif;
+  }
+  .wrap { text-align: center; }
+  .wrap > * { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; }
+  body.in .wrap > * { opacity: 1; transform: none; }
+  body.in .wrap > :nth-child(2) { transition-delay: .15s; }
+  body.in .wrap > :nth-child(3) { transition-delay: .35s; }
+  body.in .wrap > :nth-child(4) { transition-delay: .55s; }
+  .brand { display: inline-flex; align-items: center; gap: 22px; }
+  .brand img { width: 88px; height: 88px; }
+  h1 { margin: 0; font: 600 92px/1 "Geist", sans-serif; letter-spacing: -2.5px; }
+  .tag { margin: 26px 0 0; font-size: 30px; font-weight: 500; color: #aab6c4; }
+  .rule { width: 90px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #19c39a, #e5b454); margin: 30px auto; }
+  .links { font-size: 22px; line-height: 1.8; color: #8b98a8; }
+  .links b { color: #fff; font-weight: 500; font-family: "Geist Mono", monospace; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <img src="{{ICON}}" alt="" />
+      <h1>Kosh</h1>
+    </div>
+    <p class="tag">Open-source core banking · MIT</p>
+    <div class="rule"></div>
+    <div class="links">
+      <div>Built by Aman · <b>github.com/amanjhacodes55/kosh</b></div>
+      <div>{{LIVE}}</div>
+    </div>
+  </div>
+</body>
+</html>
